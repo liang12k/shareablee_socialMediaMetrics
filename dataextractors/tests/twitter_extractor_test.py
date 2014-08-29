@@ -1,19 +1,14 @@
-#!/usr/bin/env python
-
 import unittest
 import datetime
 from shareablee_socialMediaMetrics.dataextractors.twitter_extractor import getTwitter_userData
 from shareablee_socialMediaMetrics.datastore import twitter_mockdata
-# from ..twitter_extractor import getTwitter_userData
-# from ...datastore import twitter_mockdata
-
 
 class Test_getTwitter_userData(unittest.TestCase):
     def setUp(self):
         self.user_id_status0 = twitter_mockdata.status0
-        self.date_Jan01 = datetime.datetime(2014,1,1)
-        self.date_Jan05 = datetime.datetime(2014,1,5)
-        self.date_Jan09 = datetime.datetime(2014,1,9)
+        self.date_Jan01 = datetime.date(2014,1,1)
+        self.date_Jan05 = datetime.date(2014,1,5)
+        self.date_Jan09 = datetime.date(2014,1,9)
     
     def test_nonuserid_getTwitter_userData(self):
         # # invalid user_id

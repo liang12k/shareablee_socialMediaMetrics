@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 status0 = {
     "char_count_bucket": "0-19",
     "contributors": None,
