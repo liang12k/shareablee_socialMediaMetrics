@@ -1,4 +1,6 @@
-from ..tests import sample_mockdata
+#!/usr/bin/env python
+
+from shareablee_socialMediaMetrics.datastore import googleplus_mockdata
 
 def getGooglePlus_userData(user_id, startDate, endDate):
     """
@@ -9,4 +11,4 @@ def getGooglePlus_userData(user_id, startDate, endDate):
         endDate: datetime
     """
     # # read from mock file, return user_id data
-    return sample_mockdata.GOOGLEPLUS_DATA.get(user_id)
+    return
