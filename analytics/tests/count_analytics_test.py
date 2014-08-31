@@ -30,23 +30,26 @@ class Test_count_analytics(unittest.TestCase):
                                             self.date_Jan01, self.date_Aug05)
         # # converting the date to datetime.date to run unittest; can't override '_getDateTypeFormat'
         for gpData in self.googleplusData:
-            gpData['updated']=gpData['updated'].date()
+            gpData['updated']=dateconversions.convertGoogleplusDate(gpData['updated'])
 
         self.googleplusobj_UserCounts = UserCounts(self.googleplusData,
                                                    'plusones_count', 'comments_count',
                                                    'reshares_count', 'updated')
 
-    # def test_getAllData(self):
-    #     return
-    #
-    # def test_getAllFavorites(self):
-    #     return
-    #
-    # def test_getAllComments(self):
-    #     return
-    #
-    # def test_getAllShares(self):
-    #     return
+    # def test_misc(self):
+    #     self.assertEqual(True,False)
+
+    def test_getAllData(self):
+        return
+
+    def test_getAllFavorites(self):
+        return
+
+    def test_getAllComments(self):
+        return
+
+    def test_getAllShares(self):
+        return
 
 
 if __name__ == '__main__':
