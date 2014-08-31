@@ -11,6 +11,7 @@ class Test_count_analytics(unittest.TestCase):
 
         self.twitterData = getMediaData('twitter', "286200117457846272",
                                         self.date_Jan01, self.date_Aug05)
+        # # converting the date to datetime.date to run unittest; can't override '_getDateTypeFormat'
         self.twitterData['created_at']=datetime.date(2014,1,1)
         # # what's the key for twitter's comment?
         self.twitterobj_UserCounts = UserCounts(self.twitterData,
@@ -19,6 +20,7 @@ class Test_count_analytics(unittest.TestCase):
 
         self.googleplusData = getMediaData('googleplus', "100470681032489535736",
                                         self.date_Jan01, self.date_Aug05)
+        # # converting the date to datetime.date to run unittest; can't override '_getDateTypeFormat'
         self.googleplusData['updated']=datetime.date(2014,7,15)
         self.googleplusobj_UserCounts = UserCounts(self.googleplusData,
                                                    'plusones_count', 'comments_count',
