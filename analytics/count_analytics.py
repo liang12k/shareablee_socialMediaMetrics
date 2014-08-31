@@ -62,7 +62,7 @@ class UserCounts(object):
         :type endDate: datetime.date
         :return: count of all the user's favorite content within date range
         """
-        return self.getAllData(startDate, endDate).get(self.favoriteskey, 0)
+        return self.getAllData(startDate, endDate).get(self.favoriteskey, (0,))
 
     def getAllComments(self, startDate, endDate):
         """
@@ -70,7 +70,7 @@ class UserCounts(object):
         :type endDate: datetime.date
         :return: count of all the user's comment content within date range
         """
-        return self.getAllData(startDate, endDate)(self.commentskey, 0)
+        return self.getAllData(startDate, endDate).get(self.commentskey, (0,))
 
     def getAllShares(self, startDate, endDate):
         """
@@ -78,7 +78,7 @@ class UserCounts(object):
         :type endDate: datetime.date
         :return: count of all the user's shares content within date range
         """
-        return self.getAllData(startDate, endDate).get(self.shareskey, 0)
+        return self.getAllData(startDate, endDate).get(self.shareskey, (0,))
 
     def _getDateTypeFormat(self, inpDate):
         """

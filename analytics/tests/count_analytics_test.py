@@ -22,7 +22,7 @@ class Test_count_analytics(unittest.TestCase):
 
         # # what's the key for twitter's comment?
         self.twitterobj_UserCounts = UserCounts(self.twitterData,
-                                               'favorites_count', '',
+                                               'favorite_count', '',
                                                'retweet_count', 'created_at')
 
     def googleplusTestData(self):
@@ -44,13 +44,28 @@ class Test_count_analytics(unittest.TestCase):
         self.assertTrue(isinstance(self.twitterobj_UserCounts.getAllData(self.date_Jan01, self.date_Aug05), dict))
 
     def test_getAllFavorites(self):
-        return
+        gplusObj = self.googleplusobj_UserCounts
+        twtObj = self.twitterobj_UserCounts
+        self.assertTrue(isinstance(self.googleplusobj_UserCounts.getAllFavorites(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(self.googleplusobj_UserCounts.getAllFavorites(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(self.twitterobj_UserCounts.getAllFavorites(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(self.twitterobj_UserCounts.getAllFavorites(self.date_Jan01, self.date_Aug05)[0], int))
 
     def test_getAllComments(self):
-        return
+        gplusObj = self.googleplusobj_UserCounts
+        twtObj = self.twitterobj_UserCounts
+        self.assertTrue(isinstance(self.googleplusobj_UserCounts.getAllComments(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(self.googleplusobj_UserCounts.getAllComments(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(self.twitterobj_UserCounts.getAllComments(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(self.twitterobj_UserCounts.getAllComments(self.date_Jan01, self.date_Aug05)[0], int))
 
     def test_getAllShares(self):
-        return
+        gplusObj = self.googleplusobj_UserCounts
+        twtObj = self.twitterobj_UserCounts
+        self.assertTrue(isinstance(self.googleplusobj_UserCounts.getAllShares(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(self.googleplusobj_UserCounts.getAllShares(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(self.twitterobj_UserCounts.getAllShares(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(self.twitterobj_UserCounts.getAllShares(self.date_Jan01, self.date_Aug05)[0], int))
 
 
 if __name__ == '__main__':
