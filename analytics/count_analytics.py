@@ -25,6 +25,15 @@ class UserCounts(object):
         self.datekey = dateKeyStr
 
     def getAllData(self, startDate, endDate):
+        """
+        returns a collapsed dict of all values in tuples in respect
+        to their key names
+        3 fields - favoritesKeyStr, commentsKeyStr, sharesKeyStr are summed
+
+        :param startDate: datetime.date
+        :param endDate: datetime.date
+        :rtype: dict
+        """
         dataInDaterange = [datadict for datadict in self.userdata\
                                     if startDate <= self._getDateTypeFormat(datadict[self.datekey]) <= endDate]
         return self.collapseListOfDicts(dataInDaterange)
@@ -40,10 +49,10 @@ class UserCounts(object):
         for dataDict in inpListOfUserDicts:
             for k in dataDict.keys():
                 # # store all values as tuples; update with appending
-                outputDict[k] = outputDict.get(k) + (dataDict[k]) if outputDict.get(k) else (dataDict[k])
+                outputDict[k] = outputDict.get(k) + (dataDict[k],) if outputDict.get(k,()) else (dataDict[k],)
                 if k in [self.favoriteskey, self.commentskey, self.shareskey]:
                     # # store as sum of values for select keys
-                    outputDict[k] = (sum([int(num) for num in outputDict[k]]))
+                    outputDict[k] = (sum([int(num) for num in outputDict[k]]),)
         # # ref - http://stackoverflow.com/questions/16458340/python-equivalent-of-zip-for-dictionaries
         return outputDict
 

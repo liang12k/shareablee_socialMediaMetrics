@@ -40,7 +40,8 @@ class Test_count_analytics(unittest.TestCase):
     #     self.assertEqual(True,False)
 
     def test_getAllData(self):
-        return
+        self.assertTrue(isinstance(self.googleplusobj_UserCounts.getAllData(self.date_Jan01, self.date_Aug05), dict))
+        self.assertTrue(isinstance(self.twitterobj_UserCounts.getAllData(self.date_Jan01, self.date_Aug05), dict))
 
     def test_getAllFavorites(self):
         return
