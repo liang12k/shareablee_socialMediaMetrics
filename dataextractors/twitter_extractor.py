@@ -3,12 +3,12 @@ from shareablee_socialMediaMetrics.datastore import twitter_mockdata
 
 def getTwitter_userData(user_id, startDate, endDate):
     """
-        returns the twitter data for a user id from start date to end date
-        within a list
-        
-        user_id: str
-        startDate: datetime.date
-        endDate: datetime.date
+    returns the twitter data for a user id from start date to end date
+    within a list
+
+    :param user_id: str
+    :param startDate: datetime.date
+    :param endDate: datetime.date
     """
     # # TODO -- how to get select status to read, instead of whole data?
     allStatuses = [getattr(twitter_mockdata, status) for status in dir(twitter_mockdata)\

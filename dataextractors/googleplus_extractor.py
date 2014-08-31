@@ -2,12 +2,12 @@ from shareablee_socialMediaMetrics.datastore import googleplus_mockdata
 
 def getGooglePlus_userData(user_id, startDate, endDate):
     """
-        returns the google plus data for a user id from start date to end date
-        within a list
+    returns the google plus data for a user id from start date to end date
+    within a list
 
-        user_id: str
-        startDate: datetime.date
-        endDate: datetime.date
+    :param user_id: str
+    :param startDate: datetime.date
+    :param endDate: datetime.date
     """
     # # TODO -- how to get select status to read, instead of whole data?
     allActivities = [getattr(googleplus_mockdata, activity) for activity in dir(googleplus_mockdata)\

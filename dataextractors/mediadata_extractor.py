@@ -3,7 +3,7 @@ import googleplus_extractor
 
 def extractorMethodsDict():
     """
-        contains a dict to of media data extractor methods
+    contains a dict to of media data extractor methods
     """
     return {
                 'twitter' :    twitter_extractor.getTwitter_userData,
@@ -12,12 +12,12 @@ def extractorMethodsDict():
 
 def getMediaData(mediaTypeString="", user_id="", startDate=None, endDate=None):
     """
-        returns the media data from start date to end date
-        
-        mediaTypeString: str
-        user_id: str
-        startDate: datetime
-        endDate: datetime
+    returns the media data from start date to end date
+
+    :param mediaTypeString: str
+    :param :param user_id: str
+    startDate: datetime
+    :param endDate: datetime
     """
     extractMethod = extractorMethodsDict().get(mediaTypeString.lower())
     if not extractMethod:
