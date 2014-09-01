@@ -19,4 +19,4 @@ def getGooglePlus_userData(user_id, startDate, endDate):
     # # assuming all activity has an 'updated' key
     return [activity for activity in allActivities\
                     if str(user_id)==str(activity['user_id'])\
-                    and startDate <= convertGoogleplusDate(activity['updated']) <= endDate]
+                    and startDate <= convertGoogleplusDate(activity['updated']).date() <= endDate]

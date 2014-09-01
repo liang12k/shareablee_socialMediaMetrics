@@ -42,75 +42,77 @@ class Test_count_analytics(unittest.TestCase):
     #     self.assertEqual(True,False)
 
     def test_getAllData(self):
-        gplusObj = self.googleplusobj_UserCounts
-        twtObj = self.twitterobj_UserCounts
-        self.assertTrue(isinstance(gplusObj.getAllData(self.date_Jan01, self.date_Aug05), dict))
-        self.assertTrue(isinstance(gplusObj.getAllData(self.date_Jan01, self.date_Aug05, self.gplusSelectFields), dict))
-        self.assertTrue(isinstance(twtObj.getAllData(self.date_Jan01, self.date_Aug05), dict))
-        self.assertTrue(isinstance(twtObj.getAllData(self.date_Jan01, self.date_Aug05, self.twtrSelectFields), dict))
+        gplusObj_allData = self.googleplusobj_UserCounts.getAllData
+        twtObj_allData = self.twitterobj_UserCounts.getAllData
+        self.assertTrue(isinstance(gplusObj_allData(self.date_Jan01, self.date_Aug05), dict))
+        self.assertTrue(isinstance(gplusObj_allData(self.date_Jan01, self.date_Aug05,
+                                                   self.gplusSelectFields), dict))
+        self.assertTrue(isinstance(twtObj_allData(self.date_Jan01, self.date_Aug05), dict))
+        self.assertTrue(isinstance(twtObj_allData(self.date_Jan01, self.date_Aug05,
+                                                self.twtrSelectFields), dict))
 
     def test_getAllFavorites(self):
-        gplusObj = self.googleplusobj_UserCounts
-        twtObj = self.twitterobj_UserCounts
-        self.assertTrue(isinstance(gplusObj.getAllFavorites(self.date_Jan01, self.date_Aug05), tuple))
-        self.assertTrue(isinstance(gplusObj.getAllFavorites(self.date_Jan01, self.date_Aug05)[0], int))
-        self.assertTrue(isinstance(gplusObj.getAllFavorites(self.date_Jan01, self.date_Aug05,
-                                                            self.gplusSelectFields), tuple))
-        self.assertTrue(isinstance(twtObj.getAllFavorites(self.date_Jan01, self.date_Aug05), tuple))
-        self.assertTrue(isinstance(twtObj.getAllFavorites(self.date_Jan01, self.date_Aug05)[0], int))
-        self.assertTrue(isinstance(twtObj.getAllFavorites(self.date_Jan01, self.date_Aug05,
-                                                          self.twtrSelectFields), tuple))
+        gplusObj_allFavorites = self.googleplusobj_UserCounts.getCountOfAllFavorites
+        twtObj_allFavorites = self.twitterobj_UserCounts.getCountOfAllFavorites
+        self.assertTrue(isinstance(gplusObj_allFavorites(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(gplusObj_allFavorites(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(gplusObj_allFavorites(self.date_Jan01, self.date_Aug05,
+                                                           self.gplusSelectFields), tuple))
+        self.assertTrue(isinstance(twtObj_allFavorites(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(twtObj_allFavorites(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(twtObj_allFavorites(self.date_Jan01, self.date_Aug05,
+                                                        self.twtrSelectFields), tuple))
 
     def test_zerocount_getAllFavorites(self):
-        # # out of daterange of dataset
-        gplusObj = self.googleplusobj_UserCounts
-        twtObj = self.twitterobj_UserCounts
-        self.assertTrue(isinstance(gplusObj.getAllFavorites(self.date_Aug05, self.date_Sep05), tuple))
-        self.assertEqual(gplusObj.getAllFavorites(self.date_Aug05, self.date_Sep05)[0], 0)
-        self.assertTrue(isinstance(twtObj.getAllFavorites(self.date_Aug05, self.date_Sep05), tuple))
-        self.assertEqual(twtObj.getAllFavorites(self.date_Aug05, self.date_Sep05)[0], 0)
+        # # out of date range of dataset
+        gplusObj_allFavorites = self.googleplusobj_UserCounts.getCountOfAllFavorites
+        twtObj_allFavorites = self.twitterobj_UserCounts.getCountOfAllFavorites
+        self.assertTrue(isinstance(gplusObj_allFavorites(self.date_Aug05, self.date_Sep05), tuple))
+        self.assertEqual(gplusObj_allFavorites(self.date_Aug05, self.date_Sep05)[0], 0)
+        self.assertTrue(isinstance(twtObj_allFavorites(self.date_Aug05, self.date_Sep05), tuple))
+        self.assertEqual(twtObj_allFavorites(self.date_Aug05, self.date_Sep05)[0], 0)
 
     def test_getAllComments(self):
-        gplusObj = self.googleplusobj_UserCounts
-        twtObj = self.twitterobj_UserCounts
-        self.assertTrue(isinstance(gplusObj.getAllComments(self.date_Jan01, self.date_Aug05), tuple))
-        self.assertTrue(isinstance(gplusObj.getAllComments(self.date_Jan01, self.date_Aug05)[0], int))
-        self.assertTrue(isinstance(gplusObj.getAllComments(self.date_Jan01, self.date_Aug05,
-                                                           self.gplusSelectFields), tuple))
-        self.assertTrue(isinstance(twtObj.getAllComments(self.date_Jan01, self.date_Aug05), tuple))
-        self.assertTrue(isinstance(twtObj.getAllComments(self.date_Jan01, self.date_Aug05)[0], int))
-        self.assertTrue(isinstance(twtObj.getAllComments(self.date_Jan01, self.date_Aug05,
-                                                         self.twtrSelectFields), tuple))
+        gplusObj_allComments = self.googleplusobj_UserCounts.getCountOfAllComments
+        twtObj_allComments = self.twitterobj_UserCounts.getCountOfAllComments
+        self.assertTrue(isinstance(gplusObj_allComments(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(gplusObj_allComments(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(gplusObj_allComments(self.date_Jan01, self.date_Aug05,
+                                                        self.gplusSelectFields), tuple))
+        self.assertTrue(isinstance(twtObj_allComments(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(twtObj_allComments(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(twtObj_allComments(self.date_Jan01, self.date_Aug05,
+                                                    self.twtrSelectFields), tuple))
 
     def test_zerocount_getAllComments(self):
-        # # out of daterange of dataset
-        gplusObj = self.googleplusobj_UserCounts
-        twtObj = self.twitterobj_UserCounts
-        self.assertTrue(isinstance(gplusObj.getAllComments(self.date_Aug05, self.date_Sep05), tuple))
-        self.assertEqual(gplusObj.getAllComments(self.date_Aug05, self.date_Sep05)[0], 0)
-        self.assertTrue(isinstance(twtObj.getAllComments(self.date_Aug05, self.date_Sep05), tuple))
-        self.assertEqual(twtObj.getAllComments(self.date_Aug05, self.date_Sep05)[0], 0)
+        # # out of date range of dataset
+        gplusObj_allComments = self.googleplusobj_UserCounts.getCountOfAllComments
+        twtObj_allComments = self.twitterobj_UserCounts.getCountOfAllComments
+        self.assertTrue(isinstance(gplusObj_allComments(self.date_Aug05, self.date_Sep05), tuple))
+        self.assertEqual(gplusObj_allComments(self.date_Aug05, self.date_Sep05)[0], 0)
+        self.assertTrue(isinstance(twtObj_allComments(self.date_Aug05, self.date_Sep05), tuple))
+        self.assertEqual(twtObj_allComments(self.date_Aug05, self.date_Sep05)[0], 0)
 
     def test_getAllShares(self):
-        gplusObj = self.googleplusobj_UserCounts
-        twtObj = self.twitterobj_UserCounts
-        self.assertTrue(isinstance(gplusObj.getAllShares(self.date_Jan01, self.date_Aug05), tuple))
-        self.assertTrue(isinstance(gplusObj.getAllShares(self.date_Jan01, self.date_Aug05)[0], int))
-        self.assertTrue(isinstance(gplusObj.getAllShares(self.date_Jan01, self.date_Aug05,
-                                                         self.gplusSelectFields), tuple))
-        self.assertTrue(isinstance(twtObj.getAllShares(self.date_Jan01, self.date_Aug05), tuple))
-        self.assertTrue(isinstance(twtObj.getAllShares(self.date_Jan01, self.date_Aug05)[0], int))
-        self.assertTrue(isinstance(twtObj.getAllShares(self.date_Jan01, self.date_Aug05,
-                                                       self.twtrSelectFields), tuple))
+        gplusObj_allShares = self.googleplusobj_UserCounts.getCountOfAllShares
+        twtObj_allShares = self.twitterobj_UserCounts.getCountOfAllShares
+        self.assertTrue(isinstance(gplusObj_allShares(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(gplusObj_allShares(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(gplusObj_allShares(self.date_Jan01, self.date_Aug05,
+                                                    self.gplusSelectFields), tuple))
+        self.assertTrue(isinstance(twtObj_allShares(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(twtObj_allShares(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(twtObj_allShares(self.date_Jan01, self.date_Aug05,
+                                                    self.twtrSelectFields), tuple))
 
     def test_zerocount_getAllShares(self):
-        # # out of daterange of dataset
-        gplusObj = self.googleplusobj_UserCounts
-        twtObj = self.twitterobj_UserCounts
-        self.assertTrue(isinstance(gplusObj.getAllShares(self.date_Aug05, self.date_Sep05), tuple))
-        self.assertEqual(gplusObj.getAllShares(self.date_Aug05, self.date_Sep05)[0], 0)
-        self.assertTrue(isinstance(twtObj.getAllShares(self.date_Aug05, self.date_Sep05), tuple))
-        self.assertEqual(twtObj.getAllShares(self.date_Aug05, self.date_Sep05)[0], 0)
+        # # out of date range of dataset
+        gplusObj_allShares = self.googleplusobj_UserCounts.getCountOfAllShares
+        twtObj_allShares = self.twitterobj_UserCounts.getCountOfAllShares
+        self.assertTrue(isinstance(gplusObj_allShares(self.date_Aug05, self.date_Sep05), tuple))
+        self.assertEqual(gplusObj_allShares(self.date_Aug05, self.date_Sep05)[0], 0)
+        self.assertTrue(isinstance(twtObj_allShares(self.date_Aug05, self.date_Sep05), tuple))
+        self.assertEqual(twtObj_allShares(self.date_Aug05, self.date_Sep05)[0], 0)
 
 
 if __name__ == '__main__':

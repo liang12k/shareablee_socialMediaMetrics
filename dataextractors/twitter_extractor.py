@@ -18,6 +18,11 @@ def getTwitter_userData(user_id, startDate, endDate):
     
     # # TODO -- fine tune to handle hh:mm:ss for start/end dates
     # # assuming all status has an 'created_at' key
-    return [status for status in allStatuses\
-                    if str(user_id)==str(status['status_id'])\
-                    and startDate <= convertTwitterDate(status['created_at']) <= endDate]
+    allStatuses= [status for status in allStatuses\
+                        if str(user_id)==str(status['status_id'])\
+                        and startDate <= convertTwitterDate(status['created_at']).date() <= endDate]
+    # # convert the 'created_at' value into datetime.datetime format
+    for status in allStatuses:
+        if status.get('created_at'):
+            status['created_at'] = convertTwitterDate(status['created_at'])
+    return allStatuses

@@ -38,8 +38,8 @@ class UserCounts(object):
         :rtype: dict
         """
         dataInDaterange = [datadict for datadict in self.userdata\
-                                    if startDate <= self._getDateTypeFormat(datadict[self.datekey]) <= endDate\
-                                    and self._isFitDictFields(datadict, selectFieldsDict)]
+                                    if startDate <= datadict[self.datekey].date() <= endDate\
+                                    and self._isInSelectDictFields(datadict, selectFieldsDict)]
         return self.collapseListOfDicts(dataInDaterange)
 
     def collapseListOfDicts(self, inpListOfUserDicts):
@@ -61,7 +61,7 @@ class UserCounts(object):
         outputDict['dicts_with_selectfields_count'] = (len(inpListOfUserDicts),)
         return outputDict
 
-    def getAllFavorites(self, startDate, endDate, selectFieldsDict={}):
+    def getCountOfAllFavorites(self, startDate, endDate, selectFieldsDict={}):
         """
         :type startDate: datetime.date
         :type endDate: datetime.date
@@ -72,7 +72,7 @@ class UserCounts(object):
         """
         return self.getAllData(startDate, endDate, selectFieldsDict).get(self.favoriteskey, (0,))
 
-    def getAllComments(self, startDate, endDate, selectFieldsDict={}):
+    def getCountOfAllComments(self, startDate, endDate, selectFieldsDict={}):
         """
         :type startDate: datetime.date
         :type endDate: datetime.date
@@ -83,7 +83,7 @@ class UserCounts(object):
         """
         return self.getAllData(startDate, endDate, selectFieldsDict).get(self.commentskey, (0,))
 
-    def getAllShares(self, startDate, endDate, selectFieldsDict={}):
+    def getCountOfAllShares(self, startDate, endDate, selectFieldsDict={}):
         """
         :type startDate: datetime.date
         :type endDate: datetime.date
@@ -94,10 +94,22 @@ class UserCounts(object):
         """
         return self.getAllData(startDate, endDate, selectFieldsDict).get(self.shareskey, (0,))
 
+    def getCountOfAllActions(self, startDate, endDate, selectFieldsDict={}):
+        """
+        :type startDate: datetime.date
+        :type endDate: datetime.date
+        :param selectFieldsDict: dict used to filter the media data dicts to retrieve
+                                 ex: dict {'verb':'post', 'object_type':'note'} for GooglePlus data
+                                     will return dicts with those values present
+        :return: count of all the user's favories, shares, comments content within date range
+        """
+        userdataDict = self.getAllData(startDate, endDate, selectFieldsDict)
+        allActionsKeys = [self.favoriteskey, self.shareskey, self.commentskey]
+        return sum([userdataDict.get(actionkeyname, (0,))[0] for actionkeyname in allActionsKeys])
 
     ### # # ============== below are util functions ==============
 
-    def _isFitDictFields(self, inpDict, inpDictFields):
+    def _isInSelectDictFields(self, inpDict, inpDictFields):
         """
         returns bool if inpDict has the same key-values of inpDictFields dict
 
@@ -109,12 +121,3 @@ class UserCounts(object):
         # # blank inpDictFields dict defaults to taking the inpDict
         if not inpDictFields: return True
         return all([inpDict.get(k)==inpDictFields[k] for k in inpDictFields.keys()])
-
-    def _getDateTypeFormat(self, inpDate):
-        """
-        override this method, convert date string to datetime.date
-
-        :param inpDate: input date string format
-        :return: datetime.date
-        """
-        return inpDate
