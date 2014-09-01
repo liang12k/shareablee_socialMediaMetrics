@@ -18,11 +18,11 @@ class UserCounts(object):
         :param sharesKeyStr: dict string key representing user's shares in dicts
         :param dateKeyStr: dict string key representing date in user's dicts
         """
-        self.userdata = inpUserData
+        self.userdata =     inpUserData
         self.favoriteskey = favoritesKeyStr
-        self.commentskey = commentsKeyStr
-        self.shareskey = sharesKeyStr
-        self.datekey = dateKeyStr
+        self.commentskey =  commentsKeyStr
+        self.shareskey =    sharesKeyStr
+        self.datekey =      dateKeyStr
 
     # # TODO -- add dict param here to filter using dict comprehension for tweets/gpposts
     # # http://stackoverflow.com/questions/3420122/filter-dict-to-contain-only-certain-keys
@@ -59,7 +59,8 @@ class UserCounts(object):
                 if k in [self.favoriteskey, self.commentskey, self.shareskey]:
                     # # store as sum of values for select keys
                     outputDict[k] = (sum([int(num) for num in outputDict[k]]),)
-        # # ref - http://stackoverflow.com/questions/16458340/python-equivalent-of-zip-for-dictionaries
+        # # can be taken as: ex: count of tweets, googleplus notes
+        outputDict['dicts_with_selectfields_count'] = (len(inpListOfUserDicts),)
         return outputDict
 
     def getAllFavorites(self, startDate, endDate, selectFieldsDict={}):
