@@ -24,8 +24,6 @@ class UserCounts(object):
         self.shareskey =    sharesKeyStr
         self.datekey =      dateKeyStr
 
-    # # TODO -- add dict param here to filter using dict comprehension for tweets/gpposts
-    # # http://stackoverflow.com/questions/3420122/filter-dict-to-contain-only-certain-keys
     def getAllData(self, startDate, endDate, selectFieldsDict={}):
         """
         returns a collapsed dict of all values in tuples in respect
@@ -49,7 +47,7 @@ class UserCounts(object):
         collapses a list of dicts into single dict
 
         :param inpListOfUserDicts: list of dicts
-        :return: dict with all keys and tuple'ed values
+        :return: dict with all keys and tuple of values
         """
         outputDict = {}
         for dataDict in inpListOfUserDicts:
@@ -72,7 +70,7 @@ class UserCounts(object):
                                      will return dicts with those values present
         :return: count of all the user's favorite content within date range
         """
-        return self.getAllData(startDate, endDate).get(self.favoriteskey, (0,))
+        return self.getAllData(startDate, endDate, selectFieldsDict).get(self.favoriteskey, (0,))
 
     def getAllComments(self, startDate, endDate, selectFieldsDict={}):
         """
@@ -83,7 +81,7 @@ class UserCounts(object):
                                      will return dicts with those values present
         :return: count of all the user's comment content within date range
         """
-        return self.getAllData(startDate, endDate).get(self.commentskey, (0,))
+        return self.getAllData(startDate, endDate, selectFieldsDict).get(self.commentskey, (0,))
 
     def getAllShares(self, startDate, endDate, selectFieldsDict={}):
         """
@@ -94,7 +92,10 @@ class UserCounts(object):
                                      will return dicts with those values present
         :return: count of all the user's shares content within date range
         """
-        return self.getAllData(startDate, endDate).get(self.shareskey, (0,))
+        return self.getAllData(startDate, endDate, selectFieldsDict).get(self.shareskey, (0,))
+
+
+    ### # # ============== below are util functions ==============
 
     def _isFitDictFields(self, inpDict, inpDictFields):
         """
