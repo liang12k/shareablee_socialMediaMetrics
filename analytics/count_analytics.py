@@ -24,18 +24,24 @@ class UserCounts(object):
         self.shareskey = sharesKeyStr
         self.datekey = dateKeyStr
 
-    def getAllData(self, startDate, endDate):
+    # # TODO -- add dict param here to filter using dict comprehension for tweets/gpposts
+    # # http://stackoverflow.com/questions/3420122/filter-dict-to-contain-only-certain-keys
+    def getAllData(self, startDate, endDate, selectFieldsDict={}):
         """
         returns a collapsed dict of all values in tuples in respect
         to their key names
         3 fields - favoritesKeyStr, commentsKeyStr, sharesKeyStr are summed
 
-        :param startDate: datetime.date
-        :param endDate: datetime.date
+        :type startDate: datetime.date
+        :type endDate: datetime.date
+        :param selectFieldsDict: dict used to filter the media data dicts to retrieve
+                                 ex: dict {'verb':'post', 'object_type':'note'} for GooglePlus data
+                                     will return dicts with those values present
         :rtype: dict
         """
         dataInDaterange = [datadict for datadict in self.userdata\
-                                    if startDate <= self._getDateTypeFormat(datadict[self.datekey]) <= endDate]
+                                    if startDate <= self._getDateTypeFormat(datadict[self.datekey]) <= endDate\
+                                    and self._isFitDictFields(datadict, selectFieldsDict)]
         return self.collapseListOfDicts(dataInDaterange)
 
     def collapseListOfDicts(self, inpListOfUserDicts):
@@ -56,29 +62,51 @@ class UserCounts(object):
         # # ref - http://stackoverflow.com/questions/16458340/python-equivalent-of-zip-for-dictionaries
         return outputDict
 
-    def getAllFavorites(self, startDate, endDate):
+    def getAllFavorites(self, startDate, endDate, selectFieldsDict={}):
         """
         :type startDate: datetime.date
         :type endDate: datetime.date
+        :param selectFieldsDict: dict used to filter the media data dicts to retrieve
+                                 ex: dict {'verb':'post', 'object_type':'note'} for GooglePlus data
+                                     will return dicts with those values present
         :return: count of all the user's favorite content within date range
         """
         return self.getAllData(startDate, endDate).get(self.favoriteskey, (0,))
 
-    def getAllComments(self, startDate, endDate):
+    def getAllComments(self, startDate, endDate, selectFieldsDict={}):
         """
         :type startDate: datetime.date
         :type endDate: datetime.date
+        :param selectFieldsDict: dict used to filter the media data dicts to retrieve
+                                 ex: dict {'verb':'post', 'object_type':'note'} for GooglePlus data
+                                     will return dicts with those values present
         :return: count of all the user's comment content within date range
         """
         return self.getAllData(startDate, endDate).get(self.commentskey, (0,))
 
-    def getAllShares(self, startDate, endDate):
+    def getAllShares(self, startDate, endDate, selectFieldsDict={}):
         """
         :type startDate: datetime.date
         :type endDate: datetime.date
+        :param selectFieldsDict: dict used to filter the media data dicts to retrieve
+                                 ex: dict {'verb':'post', 'object_type':'note'} for GooglePlus data
+                                     will return dicts with those values present
         :return: count of all the user's shares content within date range
         """
         return self.getAllData(startDate, endDate).get(self.shareskey, (0,))
+
+    def _isFitDictFields(self, inpDict, inpDictFields):
+        """
+        returns bool if inpDict has the same key-values of inpDictFields dict
+
+        :param inpDict: current dict to determine if it has inpDictFields keys-values
+        :param inpDictFields: dict fields to filter inpDict by
+        :type inpDictFields: dict
+        :rtype: bool
+        """
+        # # blank inpDictFields dict defaults to taking the inpDict
+        if not inpDictFields: return True
+        return all([inpDict.get(k)==inpDictFields[k] for k in inpDictFields.keys()])
 
     def _getDateTypeFormat(self, inpDate):
         """

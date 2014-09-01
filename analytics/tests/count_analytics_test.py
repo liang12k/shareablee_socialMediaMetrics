@@ -14,7 +14,8 @@ class Test_count_analytics(unittest.TestCase):
         self.googleplusTestData()
 
     def twitterTestData(self):
-        self.twitterData = getMediaData('twitter', "286200117457846272",
+        self.twtrSelectFields = {'retweeted_status':None, 'in_reply_to_user_id':None, 'in_reply_to_status_id':None}
+        self.twitterData = getMediaData('twitter', "286154818974646272",
                                         self.date_Jan01, self.date_Aug05)
         # # converting the date to datetime.date to run unittest; can't override '_getDateTypeFormat'
         for tData in self.twitterData:
@@ -26,6 +27,7 @@ class Test_count_analytics(unittest.TestCase):
                                                'retweet_count', 'created_at')
 
     def googleplusTestData(self):
+        self.gplusSelectFields = {'verb':'post', 'object_type':'note'}
         self.googleplusData = getMediaData('googleplus', "100470681032489535736",
                                             self.date_Jan01, self.date_Aug05)
         # # converting the date to datetime.date to run unittest; can't override '_getDateTypeFormat'
@@ -40,16 +42,24 @@ class Test_count_analytics(unittest.TestCase):
     #     self.assertEqual(True,False)
 
     def test_getAllData(self):
-        self.assertTrue(isinstance(self.googleplusobj_UserCounts.getAllData(self.date_Jan01, self.date_Aug05), dict))
-        self.assertTrue(isinstance(self.twitterobj_UserCounts.getAllData(self.date_Jan01, self.date_Aug05), dict))
+        gplusObj = self.googleplusobj_UserCounts
+        twtObj = self.twitterobj_UserCounts
+        self.assertTrue(isinstance(gplusObj.getAllData(self.date_Jan01, self.date_Aug05), dict))
+        self.assertTrue(isinstance(gplusObj.getAllData(self.date_Jan01, self.date_Aug05, self.gplusSelectFields), dict))
+        self.assertTrue(isinstance(twtObj.getAllData(self.date_Jan01, self.date_Aug05), dict))
+        self.assertTrue(isinstance(twtObj.getAllData(self.date_Jan01, self.date_Aug05, self.twtrSelectFields), dict))
 
     def test_getAllFavorites(self):
         gplusObj = self.googleplusobj_UserCounts
         twtObj = self.twitterobj_UserCounts
         self.assertTrue(isinstance(gplusObj.getAllFavorites(self.date_Jan01, self.date_Aug05), tuple))
         self.assertTrue(isinstance(gplusObj.getAllFavorites(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(gplusObj.getAllFavorites(self.date_Jan01, self.date_Aug05,
+                                                            self.gplusSelectFields), tuple))
         self.assertTrue(isinstance(twtObj.getAllFavorites(self.date_Jan01, self.date_Aug05), tuple))
         self.assertTrue(isinstance(twtObj.getAllFavorites(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(twtObj.getAllFavorites(self.date_Jan01, self.date_Aug05,
+                                                          self.twtrSelectFields), tuple))
 
     def test_zerocount_getAllFavorites(self):
         # # out of daterange of dataset
@@ -65,8 +75,12 @@ class Test_count_analytics(unittest.TestCase):
         twtObj = self.twitterobj_UserCounts
         self.assertTrue(isinstance(gplusObj.getAllComments(self.date_Jan01, self.date_Aug05), tuple))
         self.assertTrue(isinstance(gplusObj.getAllComments(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(gplusObj.getAllComments(self.date_Jan01, self.date_Aug05,
+                                                           self.gplusSelectFields), tuple))
         self.assertTrue(isinstance(twtObj.getAllComments(self.date_Jan01, self.date_Aug05), tuple))
         self.assertTrue(isinstance(twtObj.getAllComments(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(twtObj.getAllComments(self.date_Jan01, self.date_Aug05,
+                                                         self.twtrSelectFields), tuple))
 
     def test_zerocount_getAllComments(self):
         # # out of daterange of dataset
@@ -82,8 +96,12 @@ class Test_count_analytics(unittest.TestCase):
         twtObj = self.twitterobj_UserCounts
         self.assertTrue(isinstance(gplusObj.getAllShares(self.date_Jan01, self.date_Aug05), tuple))
         self.assertTrue(isinstance(gplusObj.getAllShares(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(gplusObj.getAllShares(self.date_Jan01, self.date_Aug05,
+                                                         self.gplusSelectFields), tuple))
         self.assertTrue(isinstance(twtObj.getAllShares(self.date_Jan01, self.date_Aug05), tuple))
         self.assertTrue(isinstance(twtObj.getAllShares(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(twtObj.getAllShares(self.date_Jan01, self.date_Aug05,
+                                                       self.twtrSelectFields), tuple))
 
     def test_zerocount_getAllShares(self):
         # # out of daterange of dataset
