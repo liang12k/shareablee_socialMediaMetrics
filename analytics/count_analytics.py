@@ -55,14 +55,9 @@ class UserCounts(object):
                 # # store all values as tuples; update with appending
                 outputDict[k] = outputDict.get(k) + (dataDict[k],) if outputDict.get(k,()) else (dataDict[k],)
                 if k in [self.favoriteskey, self.commentskey, self.shareskey]:
-                    # countSum = 0
-                    # for num in outputDict[k]:
-                    #     if num:
-                    #         countSum += 1 if isinstance(num, str) else num
-                    # outputDict[k] = (countSum,)
-
+                    # # TODO -- what if val is a valid count number in string format?
                     # # store as sum of values for select keys
-                    outputDict[k] = (sum([int(1 if isinstance(num, str) else 0) for num in outputDict[k] if num]),)
+                    outputDict[k] = (sum([int(1 if isinstance(val, str) else 0) for val in outputDict[k] if val]),)
         # # can be taken as: ex: count of tweets, googleplus notes
         outputDict['dicts_with_selectfields_count'] = (len(inpListOfUserDicts),)
         return outputDict

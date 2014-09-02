@@ -15,7 +15,7 @@ class Test_count_analytics(unittest.TestCase):
 
     def twitterTestData(self):
         self.twtrSelectFields = {'retweeted_status':None, 'in_reply_to_user_id':None, 'in_reply_to_status_id':None}
-        self.twitterData = getMediaData('twitter', "286154818974646272",
+        self.twitterData = getMediaData('twitter', "286200117457846272",
                                         self.date_Jan01, self.date_Aug05)
         # # converting the date to datetime.date to run unittest; can't override '_getDateTypeFormat'
         for tData in self.twitterData:
