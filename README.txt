@@ -5,7 +5,8 @@ Shareablee - interview question: providing a module used to generate social medi
              for twitter, google+ using mock data
 
 
-Using: PyCharm / Python 2.6.7
+Using: PyCharm 3.4.1 (Community Edition) / Python 2.6.7
+
 
 
 --------
@@ -15,6 +16,7 @@ To get twitter mock data extract in a list of dicts, args are:
 + status_id string
 + start datetime.datetime
 + end datetime.datetime
+
 from shareablee_socialMediaMetrics.dataextractors.twitter_extractor import getTwitter_userData
 ex:
     twitterData = getMediaData('twitter', "286200117457846272",
@@ -25,6 +27,7 @@ To get the analytics of the above twitter mock data extract, args are:
 + list of dataset dicts
 + start datetime.datetime
 + end datetime.datetime
+
 from shareablee_socialMediaMetrics.analytics.twitter_analytics import TwitterAnalytics
 ex:
     twitterDataAnalytics = TwitterAnalytics(twitterData,
@@ -39,6 +42,7 @@ To get google+ mock data extract in a list of dicts, args are:
 + status_id string
 + start datetime.datetime
 + end datetime.datetime
+
 from shareablee_socialMediaMetrics.dataextractors.googleplus_extractor import getGooglePlus_userData
 ex:
     googleplusData = getMediaData('googleplus', "100470681032489535736",
@@ -50,6 +54,7 @@ To get the analytics of the above google+ mock data extract, args are:
 + list of dataset dicts
 + start datetime.datetime
 + end datetime.datetime
+
 from shareablee_socialMediaMetrics.analytics.googleplus_analytics import GoogleplusAnalytics
 ex:
     googleplusDataAnalytics = GoogleplusAnalytics(googleplusData,
