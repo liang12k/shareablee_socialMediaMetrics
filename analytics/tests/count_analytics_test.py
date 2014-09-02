@@ -2,9 +2,8 @@ import unittest
 import datetime
 from shareablee_socialMediaMetrics.analytics.count_analytics import UserCounts
 from shareablee_socialMediaMetrics.dataextractors.mediadata_extractor import getMediaData
-from shareablee_socialMediaMetrics.utils import dateconversions
 
-class Test_count_analytics(unittest.TestCase):
+class Test_UserCounts(unittest.TestCase):
     def setUp(self):
         self.date_Jan01 = datetime.date(2014,1,1)
         self.date_Aug05 = datetime.date(2014,8,5)
