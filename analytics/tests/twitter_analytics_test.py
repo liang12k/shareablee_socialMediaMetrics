@@ -10,7 +10,6 @@ class Test_TwitterAnalytics(unittest.TestCase):
         self.date_Sep05 = datetime.date(2014,9,5)
 
         self.twitterTestData()
-        self.googleplusTestData()
 
     def twitterTestData(self):
         self.twtrSelectFields = {'retweeted_status':None, 'in_reply_to_user_id':None, 'in_reply_to_status_id':None}
@@ -18,14 +17,6 @@ class Test_TwitterAnalytics(unittest.TestCase):
         self.twitterobj_TwitterAnalytics = TwitterAnalytics(self.twitterData,
                                                             'favorite_count', 'in_reply_to_screen_name',
                                                             'retweet_count', 'created_at',
-                                                            self.date_Jan01, self.date_Aug05)
-
-    def googleplusTestData(self):
-        self.gplusSelectFields = {'verb':'post', 'object_type':'note'}
-        self.googleplusData = getMediaData('googleplus', "100470681032489535736", self.date_Jan01, self.date_Aug05)
-        self.googleplusobj_TwitterAnalytics = TwitterAnalytics(self.googleplusData,
-                                                            'plusones_count', 'comments_count',
-                                                            'reshares_count', 'updated',
                                                             self.date_Jan01, self.date_Aug05)
 
     def test_getCountOfFavorites(self):
@@ -46,7 +37,8 @@ class Test_TwitterAnalytics(unittest.TestCase):
 
     def test_getCountOfActionsPerTweet(self):
         # # user doesn't have a 'tweet', just a reply
-        self.assertEqual({'total_actions_per_tweet': 0}, self.twitterobj_TwitterAnalytics.getCountOfActionsPerTweet())
+        self.assertEqual({'total_actions_per_tweet': 0},
+                         self.twitterobj_TwitterAnalytics.getCountOfActionsPerTweet())
 
 
 if __name__ == '__main__':

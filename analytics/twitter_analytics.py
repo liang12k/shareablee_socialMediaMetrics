@@ -50,7 +50,7 @@ class TwitterAnalytics(UserCounts):
 
     def getCountOfActions(self):
         """
-        :return: int sum of the counts of (favorites, shares, comments)
+        :return: int sum of the counts of (favorites, shares, replies)
         """
         # return self.getCountOfAllActions(self.startdate, self.enddate)
         countFuncs = [self.getCountOfFavorites, self.getCountOfRetweets, self.getCountOfReplies]
@@ -58,12 +58,11 @@ class TwitterAnalytics(UserCounts):
 
     def getCountOfActionsPerTweet(self):
         """
-        :return: int sum of the counts of (favorites, shares, comments) per tweet
+        :return: int sum of the counts of (favorites, shares, replies) per tweet
         """
-        # return self.getCountOfAllActions(self.startdate, self.enddate)
         countFuncs = [self.getCountOfFavorites, self.getCountOfRetweets, self.getCountOfReplies]
         try:
-            totalActionsPerTweet = sum([f() for f in countFuncs])/self.getCountOfTweets()
+            totalActionsPerTweet = self.getCountOfActions()['total_actions']/self.getCountOfTweets()
         except ZeroDivisionError:
             totalActionsPerTweet = 0
         return {'total_actions_per_tweet' : totalActionsPerTweet}
