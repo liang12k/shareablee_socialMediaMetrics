@@ -33,19 +33,20 @@ class Test_TwitterAnalytics(unittest.TestCase):
 
     def test_getCountOfReplies(self):
         self.assertEqual(1, self.twitterobj_TwitterAnalytics.getCountOfReplies())
-    #
+
     def test_getCountOfRetweets(self):
         self.assertEqual(700, self.twitterobj_TwitterAnalytics.getCountOfRetweets())
 
     def test_getCountOfTweets(self):
+        # # user doesn't have a 'tweet', just a reply
          self.assertEqual(0, self.twitterobj_TwitterAnalytics.getCountOfTweets())
-    #
+
     def test_getCountOfActions(self):
-        self.assertEqual(1301, self.twitterobj_TwitterAnalytics.getCountOfActions())
+        self.assertEqual({'total_actions': 1301}, self.twitterobj_TwitterAnalytics.getCountOfActions())
 
     def test_getCountOfActionsPerTweet(self):
         # # user doesn't have a 'tweet', just a reply
-        self.assertEqual(0, self.twitterobj_TwitterAnalytics.getCountOfActionsPerTweet())
+        self.assertEqual({'total_actions_per_tweet': 0}, self.twitterobj_TwitterAnalytics.getCountOfActionsPerTweet())
 
 
 if __name__ == '__main__':

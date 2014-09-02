@@ -31,7 +31,7 @@ class TwitterAnalytics(UserCounts):
         :return: int count of replies
         """
         return self.getCountOfAllComments(self.startdate, self.enddate,
-                                          selectFieldsDict={'in_reply_to_screen_name':'str'})[0]
+                                          selectFieldsDict={'in_reply_to_screen_name':lambda x: isinstance(x, str)})[0]
 
     def getCountOfRetweets(self):
         """
@@ -44,9 +44,9 @@ class TwitterAnalytics(UserCounts):
         :return: int count of tweets
         """
         return self.getCountOfAllPostings(self.startdate, self.enddate,
-                                          selectFieldsDict={'retweeted_status':None,
-                                                            'in_reply_to_user_id':None,
-                                                            'in_reply_to_status_id':None})[0]
+                                          selectFieldsDict={'retweeted_status':lambda x: x is None,
+                                                            'in_reply_to_user_id':lambda x: x is None,
+                                                            'in_reply_to_status_id':lambda x: x is None})[0]
 
     def getCountOfActions(self):
         """

@@ -145,4 +145,5 @@ class UserCounts(object):
         """
         # # blank inpDictFields dict defaults to taking the inpDict
         if not inpDictFields: return True
-        return all([type(inpDict.get(k))==type(inpDictFields[k]) for k in inpDictFields.keys()])
+        # return all([type(inpDict.get(k))==type(inpDictFields[k]) for k in inpDictFields.keys()])
+        return all([inpDictFields[k](inpDict.get(k)) for k in inpDictFields.keys()])
