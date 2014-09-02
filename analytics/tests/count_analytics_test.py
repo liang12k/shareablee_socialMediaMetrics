@@ -104,6 +104,18 @@ class Test_count_analytics(unittest.TestCase):
         self.assertTrue(isinstance(twtObj_allShares(self.date_Aug05, self.date_Sep05), tuple))
         self.assertEqual(twtObj_allShares(self.date_Aug05, self.date_Sep05)[0], 0)
 
+    def test_getCountOfAllPostings(self):
+        gplusObj_allPostings = self.googleplusobj_UserCounts.getCountOfAllPostings
+        twtObj_allPostings = self.twitterobj_UserCounts.getCountOfAllPostings
+        self.assertTrue(isinstance(gplusObj_allPostings(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(gplusObj_allPostings(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(gplusObj_allPostings(self.date_Jan01, self.date_Aug05,
+                                                    self.gplusSelectFields), tuple))
+        self.assertTrue(isinstance(twtObj_allPostings(self.date_Jan01, self.date_Aug05), tuple))
+        self.assertTrue(isinstance(twtObj_allPostings(self.date_Jan01, self.date_Aug05)[0], int))
+        self.assertTrue(isinstance(twtObj_allPostings(self.date_Jan01, self.date_Aug05,
+                                                    self.twtrSelectFields), tuple))
+
 
 if __name__ == '__main__':
     unittest.main()

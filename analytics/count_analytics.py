@@ -18,11 +18,12 @@ class UserCounts(object):
         :param sharesKeyStr: dict string key representing user's shares in dicts
         :param dateKeyStr: dict string key representing date in user's dicts
         """
-        self.userdata =     inpUserData
-        self.favoriteskey = favoritesKeyStr
-        self.commentskey =  commentsKeyStr
-        self.shareskey =    sharesKeyStr
-        self.datekey =      dateKeyStr
+        self.userdata =         inpUserData
+        self.favoriteskey =     favoritesKeyStr
+        self.commentskey =      commentsKeyStr
+        self.shareskey =        sharesKeyStr
+        self.datekey =          dateKeyStr
+        self.postingscountkey = 'dicts_with_selectfields_count'
 
     def getAllData(self, startDate, endDate, selectFieldsDict={}):
         """
@@ -59,7 +60,7 @@ class UserCounts(object):
                     # # store as sum of values for select keys
                     outputDict[k] = (sum([int(1 if isinstance(val, str) else 0) for val in outputDict[k] if val]),)
         # # can be taken as: ex: count of tweets, googleplus notes
-        outputDict['dicts_with_selectfields_count'] = (len(inpListOfUserDicts),)
+        outputDict[self.postingscountkey] = (len(inpListOfUserDicts),)
         return outputDict
 
     def getCountOfAllFavorites(self, startDate, endDate, selectFieldsDict={}):
@@ -70,6 +71,8 @@ class UserCounts(object):
                                  ex: dict {'verb':'post', 'object_type':'note'} for GooglePlus data
                                      will return dicts with those values present
         :return: count of all the user's favorite content within date range
+                 (ie: Favorites for twitter, PlusOnes for GooglePlus)
+        :rtype: int
         """
         return self.getAllData(startDate, endDate, selectFieldsDict).get(self.favoriteskey, (0,))
 
@@ -81,6 +84,8 @@ class UserCounts(object):
                                  ex: dict {'verb':'post', 'object_type':'note'} for GooglePlus data
                                      will return dicts with those values present
         :return: count of all the user's comment content within date range
+                 (ie: Replies for twitter, Comments for GooglePlus)
+        :rtype: int
         """
         return self.getAllData(startDate, endDate, selectFieldsDict).get(self.commentskey, (0,))
 
@@ -91,9 +96,24 @@ class UserCounts(object):
         :param selectFieldsDict: dict used to filter the media data dicts to retrieve
                                  ex: dict {'verb':'post', 'object_type':'note'} for GooglePlus data
                                      will return dicts with those values present
-        :return: count of all the user's shares content within date range
+        :return: count of all the user's content shares within date range
+                 (ie: Retweets for twitter, Reshares for GooglePlus)
+        :rtype: int
         """
         return self.getAllData(startDate, endDate, selectFieldsDict).get(self.shareskey, (0,))
+
+    def getCountOfAllPostings(self, startDate, endDate, selectFieldsDict={}):
+        """
+        :type startDate: datetime.date
+        :type endDate: datetime.date
+        :param selectFieldsDict: dict used to filter the media data dicts to retrieve
+                                 ex: dict {'verb':'post', 'object_type':'note'} for GooglePlus data
+                                     will return dicts with those values present
+        :return: count of all the user's shares postings within date range
+                 (ie: Tweet for twitter, Notes for GooglePlus)
+        :rtype: int
+        """
+        return self.getAllData(startDate, endDate, selectFieldsDict).get(self.postingscountkey, (0,))
 
     def getCountOfAllActions(self, startDate, endDate, selectFieldsDict={}):
         """
@@ -105,7 +125,7 @@ class UserCounts(object):
         :param selectFieldsDict: dict used to filter the media data dicts to retrieve
                                  ex: dict {'verb':'post', 'object_type':'note'} for GooglePlus data
                                      will return dicts with those values present
-        :return: count of all the user's favories, shares, comments content within date range
+        :return: count of all the user's favorites, shares, comments content within date range
         :rtype: int
         """
         userdataDict = self.getAllData(startDate, endDate, selectFieldsDict)
