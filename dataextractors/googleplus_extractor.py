@@ -1,5 +1,4 @@
 from shareablee_socialMediaMetrics.datastore import googleplus_mockdata
-from shareablee_socialMediaMetrics.utils.dateconversions import convertGoogleplusDate
 
 def getGooglePlus_userData(user_id, startDate, endDate):
     """
@@ -19,4 +18,4 @@ def getGooglePlus_userData(user_id, startDate, endDate):
     # # assuming all activity has an 'updated' key
     return [activity for activity in allActivities\
                     if str(user_id)==str(activity['user_id'])\
-                    and startDate <= convertGoogleplusDate(activity['updated']).date() <= endDate]
+                    and startDate <= activity['updated'].date() <= endDate]

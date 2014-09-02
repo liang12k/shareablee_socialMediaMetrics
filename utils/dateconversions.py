@@ -18,17 +18,3 @@ def convertTwitterDate(twitterDate):
         # # TODO -- handle this using regex?
         twitterDate = datetime.datetime.strptime(twitterDate, "%Y-%m-%dT%H:%M:%S")
     return twitterDate
-
-def convertGoogleplusDate(googleplusDate):
-    """
-    converts Google Plus' date field value
-    to datetime type
-
-    :param googleplusDate: google plus' date field value
-    :type googleplusDate: datetime.datetime
-    :return: datetime of googleplusDate
-    """
-    # # leaving this here in case GooglePlus changes its datetime value format
-    # if isinstance(googleplusDate, datetime.datetime):
-    #     return googleplusDate
-    return googleplusDate

@@ -5,8 +5,7 @@ class TwitterAnalytics(UserCounts):
     """
     class handling getting the basic favorites, retweets, replies counts and metrics
     """
-    def __init__(self, inpUserData=[], favoritesKeyStr='', commentsKeyStr='', sharesKeyStr='', dateKeyStr='',
-                startDate=None, endDate=None):
+    def __init__(self, inpUserData=[], startDate=None, endDate=None):
         """
         :param inpUserData: list of dicts (user's dicts of social media info)
         :param favoritesKeyStr: dict string key representing user's favorites in dicts
@@ -16,7 +15,9 @@ class TwitterAnalytics(UserCounts):
         :type startDate: datetime.date
         :type endDate: datetime.date
         """
-        super(TwitterAnalytics, self).__init__(inpUserData, favoritesKeyStr, commentsKeyStr, sharesKeyStr, dateKeyStr)
+        super(TwitterAnalytics, self).__init__(inpUserData,
+                                               'favorite_count', 'in_reply_to_screen_name',
+                                               'retweet_count', 'created_at',)
         self.startdate =    startDate
         self.enddate =      endDate
 

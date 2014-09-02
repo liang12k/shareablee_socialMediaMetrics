@@ -32,5 +32,3 @@ class Test_getTwitter_userData(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-    # suite = unittest.defaultTestLoader.loadTestsFromTestCase(Test_getTwitter_userData)
-    # unittest.TextTestRunner().run(suite)

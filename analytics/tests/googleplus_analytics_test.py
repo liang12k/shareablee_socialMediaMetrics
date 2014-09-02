@@ -12,11 +12,8 @@ class Test_GoogleplusAnalytics(unittest.TestCase):
         self.googleplusTestData()
 
     def googleplusTestData(self):
-        self.gplusSelectFields = {'verb':'post', 'object_type':'note'}
         self.googleplusData = getMediaData('googleplus', "100470681032489535736", self.date_Jan01, self.date_Aug05)
         self.googleplusobj_GoogleplusAnalytics = GoogleplusAnalytics(self.googleplusData,
-                                                                    'plusones_count', 'comments_count',
-                                                                    'reshares_count', 'updated',
                                                                     self.date_Jan01, self.date_Aug05)
 
     def test_getCountOfFavorites(self):

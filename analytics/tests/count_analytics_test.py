@@ -13,7 +13,9 @@ class Test_UserCounts(unittest.TestCase):
         self.googleplusTestData()
 
     def twitterTestData(self):
-        self.twtrSelectFields = {'retweeted_status':None, 'in_reply_to_user_id':None, 'in_reply_to_status_id':None}
+        self.twtrSelectFields = {'retweeted_status':lambda x: x is None,
+                                'in_reply_to_user_id':lambda x: x is None,
+                                'in_reply_to_status_id':lambda x: x is None}
         self.twitterData = getMediaData('twitter', "286200117457846272", self.date_Jan01, self.date_Aug05)
         # # in_reply_to_user_id ?= key for twitter's replies?; no 'reply_count'
         self.twitterobj_UserCounts = UserCounts(self.twitterData,
@@ -21,7 +23,8 @@ class Test_UserCounts(unittest.TestCase):
                                                'retweet_count', 'created_at')
 
     def googleplusTestData(self):
-        self.gplusSelectFields = {'verb':'post', 'object_type':'note'}
+        self.gplusSelectFields = {'verb':lambda x: x.lower()=='post',
+                                'object_type':lambda x: x.lower()=='note'}
         self.googleplusData = getMediaData('googleplus', "100470681032489535736", self.date_Jan01, self.date_Aug05)
         self.googleplusobj_UserCounts = UserCounts(self.googleplusData,
                                                    'plusones_count', 'comments_count',

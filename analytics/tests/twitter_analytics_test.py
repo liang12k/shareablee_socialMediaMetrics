@@ -12,11 +12,8 @@ class Test_TwitterAnalytics(unittest.TestCase):
         self.twitterTestData()
 
     def twitterTestData(self):
-        self.twtrSelectFields = {'retweeted_status':None, 'in_reply_to_user_id':None, 'in_reply_to_status_id':None}
         self.twitterData = getMediaData('twitter', "286200117457846272", self.date_Jan01, self.date_Aug05)
         self.twitterobj_TwitterAnalytics = TwitterAnalytics(self.twitterData,
-                                                            'favorite_count', 'in_reply_to_screen_name',
-                                                            'retweet_count', 'created_at',
                                                             self.date_Jan01, self.date_Aug05)
 
     def test_getCountOfFavorites(self):

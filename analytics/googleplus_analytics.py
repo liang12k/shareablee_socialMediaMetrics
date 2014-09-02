@@ -5,8 +5,7 @@ class GoogleplusAnalytics(UserCounts):
     """
     class handling getting the basic plusones, reshares, comments counts and metrics
     """
-    def __init__(self, inpUserData=[], favoritesKeyStr='', commentsKeyStr='', sharesKeyStr='', dateKeyStr='',
-                startDate=None, endDate=None):
+    def __init__(self, inpUserData=[], startDate=None, endDate=None):
         """
         :param inpUserData: list of dicts (user's dicts of social media info)
         :param favoritesKeyStr: dict string key representing user's favorites in dicts
@@ -16,8 +15,9 @@ class GoogleplusAnalytics(UserCounts):
         :type startDate: datetime.date
         :type endDate: datetime.date
         """
-        super(GoogleplusAnalytics, self).__init__(inpUserData, favoritesKeyStr, commentsKeyStr,
-                                                  sharesKeyStr, dateKeyStr)
+        super(GoogleplusAnalytics, self).__init__(inpUserData,
+                                                  'plusones_count', 'comments_count',
+                                                  'reshares_count', 'updated',)
         self.startdate =    startDate
         self.enddate =      endDate
 
