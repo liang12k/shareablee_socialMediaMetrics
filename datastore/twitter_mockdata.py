@@ -1,3 +1,5 @@
+# # twitter tweet doc: https://dev.twitter.com/docs/platform-objects/tweets
+
 status0 = {
     "char_count_bucket": "0-19",
     "contributors": None,

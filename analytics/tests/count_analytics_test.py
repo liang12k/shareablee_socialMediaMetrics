@@ -21,9 +21,9 @@ class Test_count_analytics(unittest.TestCase):
         for tData in self.twitterData:
             tData['created_at']= dateconversions.convertTwitterDate(tData['created_at'])
 
-        # # what's the key for twitter's comment?
+        # # in_reply_to_user_id ?= key for twitter's replies?
         self.twitterobj_UserCounts = UserCounts(self.twitterData,
-                                               'favorite_count', '',
+                                               'favorite_count', 'in_reply_to_screen_name',
                                                'retweet_count', 'created_at')
 
     def googleplusTestData(self):

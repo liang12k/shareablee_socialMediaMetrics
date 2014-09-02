@@ -55,8 +55,14 @@ class UserCounts(object):
                 # # store all values as tuples; update with appending
                 outputDict[k] = outputDict.get(k) + (dataDict[k],) if outputDict.get(k,()) else (dataDict[k],)
                 if k in [self.favoriteskey, self.commentskey, self.shareskey]:
+                    # countSum = 0
+                    # for num in outputDict[k]:
+                    #     if num:
+                    #         countSum += 1 if isinstance(num, str) else num
+                    # outputDict[k] = (countSum,)
+
                     # # store as sum of values for select keys
-                    outputDict[k] = (sum([int(num) for num in outputDict[k]]),)
+                    outputDict[k] = (sum([int(1 if isinstance(num, str) else 0) for num in outputDict[k] if num]),)
         # # can be taken as: ex: count of tweets, googleplus notes
         outputDict['dicts_with_selectfields_count'] = (len(inpListOfUserDicts),)
         return outputDict
@@ -96,12 +102,16 @@ class UserCounts(object):
 
     def getCountOfAllActions(self, startDate, endDate, selectFieldsDict={}):
         """
+        returns int sum of the counts of favorites, shares, comments
+        can be overridden to get own sum of media data fields
+
         :type startDate: datetime.date
         :type endDate: datetime.date
         :param selectFieldsDict: dict used to filter the media data dicts to retrieve
                                  ex: dict {'verb':'post', 'object_type':'note'} for GooglePlus data
                                      will return dicts with those values present
         :return: count of all the user's favories, shares, comments content within date range
+        :rtype: int
         """
         userdataDict = self.getAllData(startDate, endDate, selectFieldsDict)
         allActionsKeys = [self.favoriteskey, self.shareskey, self.commentskey]
