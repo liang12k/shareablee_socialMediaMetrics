@@ -15,25 +15,15 @@ class Test_count_analytics(unittest.TestCase):
 
     def twitterTestData(self):
         self.twtrSelectFields = {'retweeted_status':None, 'in_reply_to_user_id':None, 'in_reply_to_status_id':None}
-        self.twitterData = getMediaData('twitter', "286200117457846272",
-                                        self.date_Jan01, self.date_Aug05)
-        # # converting the date to datetime.date to run unittest; can't override '_getDateTypeFormat'
-        for tData in self.twitterData:
-            tData['created_at']= dateconversions.convertTwitterDate(tData['created_at'])
-
-        # # in_reply_to_user_id ?= key for twitter's replies?
+        self.twitterData = getMediaData('twitter', "286200117457846272", self.date_Jan01, self.date_Aug05)
+        # # in_reply_to_user_id ?= key for twitter's replies?; no 'reply_count'
         self.twitterobj_UserCounts = UserCounts(self.twitterData,
                                                'favorite_count', 'in_reply_to_screen_name',
                                                'retweet_count', 'created_at')
 
     def googleplusTestData(self):
         self.gplusSelectFields = {'verb':'post', 'object_type':'note'}
-        self.googleplusData = getMediaData('googleplus', "100470681032489535736",
-                                            self.date_Jan01, self.date_Aug05)
-        # # converting the date to datetime.date to run unittest; can't override '_getDateTypeFormat'
-        for gpData in self.googleplusData:
-            gpData['updated']=dateconversions.convertGoogleplusDate(gpData['updated'])
-
+        self.googleplusData = getMediaData('googleplus', "100470681032489535736", self.date_Jan01, self.date_Aug05)
         self.googleplusobj_UserCounts = UserCounts(self.googleplusData,
                                                    'plusones_count', 'comments_count',
                                                    'reshares_count', 'updated')
