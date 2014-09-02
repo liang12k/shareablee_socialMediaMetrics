@@ -58,7 +58,7 @@ class UserCounts(object):
                 if k in [self.favoriteskey, self.commentskey, self.shareskey]:
                     # # TODO -- what if val is a valid count number in string format?
                     # # store as sum of values for select keys
-                    outputDict[k] = (sum([int(1 if isinstance(val, str) else 0) for val in outputDict[k] if val]),)
+                    outputDict[k] = (sum([int(1 if isinstance(val, str) else val) for val in outputDict[k] if val]),)
         # # can be taken as: ex: count of tweets, googleplus notes
         outputDict[self.postingscountkey] = (len(inpListOfUserDicts),)
         return outputDict

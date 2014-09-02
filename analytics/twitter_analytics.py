@@ -16,7 +16,7 @@ class TwitterAnalytics(UserCounts):
         :type startDate: datetime.date
         :type endDate: datetime.date
         """
-        super(TwitterAnalytics, self).__init__()
+        super(TwitterAnalytics, self).__init__(inpUserData, favoritesKeyStr, commentsKeyStr, sharesKeyStr, dateKeyStr)
         self.startdate =    startDate
         self.enddate =      endDate
 
@@ -31,7 +31,7 @@ class TwitterAnalytics(UserCounts):
         :return: int count of replies
         """
         return self.getCountOfAllComments(self.startdate, self.enddate,
-                                          selectFieldsDict={'in_reply_to_screen_name':type(str)})[0]
+                                          selectFieldsDict={'in_reply_to_screen_name':'str'})[0]
 
     def getCountOfRetweets(self):
         """
@@ -44,9 +44,9 @@ class TwitterAnalytics(UserCounts):
         :return: int count of tweets
         """
         return self.getCountOfAllPostings(self.startdate, self.enddate,
-                                          selectFieldsDict={'retweeted_status':type(None),
-                                                            'in_reply_to_user_id':type(None),
-                                                            'in_reply_to_status_id':type(None)})[0]
+                                          selectFieldsDict={'retweeted_status':None,
+                                                            'in_reply_to_user_id':None,
+                                                            'in_reply_to_status_id':None})[0]
 
     def getCountOfActions(self):
         """

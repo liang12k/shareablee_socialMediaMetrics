@@ -23,28 +23,29 @@ class Test_TwitterAnalytics(unittest.TestCase):
     def googleplusTestData(self):
         self.gplusSelectFields = {'verb':'post', 'object_type':'note'}
         self.googleplusData = getMediaData('googleplus', "100470681032489535736", self.date_Jan01, self.date_Aug05)
-        self.twitterobj_TwitterAnalytics = TwitterAnalytics(self.googleplusData,
+        self.googleplusobj_TwitterAnalytics = TwitterAnalytics(self.googleplusData,
                                                             'plusones_count', 'comments_count',
                                                             'reshares_count', 'updated',
                                                             self.date_Jan01, self.date_Aug05)
 
     def test_getCountOfFavorites(self):
-        self.twitterobj_TwitterAnalytics.getCountOfFavorites()
+        self.assertEqual(600, self.twitterobj_TwitterAnalytics.getCountOfFavorites())
 
     def test_getCountOfReplies(self):
-        self.twitterobj_TwitterAnalytics.getCountOfReplies()
-
+        self.assertEqual(1, self.twitterobj_TwitterAnalytics.getCountOfReplies())
+    #
     def test_getCountOfRetweets(self):
-        self.twitterobj_TwitterAnalytics.getCountOfRetweets()
+        self.assertEqual(700, self.twitterobj_TwitterAnalytics.getCountOfRetweets())
 
     def test_getCountOfTweets(self):
-        self.twitterobj_TwitterAnalytics.getCountOfTweets()
-
+         self.assertEqual(0, self.twitterobj_TwitterAnalytics.getCountOfTweets())
+    #
     def test_getCountOfActions(self):
-        self.twitterobj_TwitterAnalytics.getCountOfActions()
+        self.assertEqual(1301, self.twitterobj_TwitterAnalytics.getCountOfActions())
 
     def test_getCountOfActionsPerTweet(self):
-        self.twitterobj_TwitterAnalytics.getCountOfActionsPerTweet()
+        # # user doesn't have a 'tweet', just a reply
+        self.assertEqual(0, self.twitterobj_TwitterAnalytics.getCountOfActionsPerTweet())
 
 
 if __name__ == '__main__':
