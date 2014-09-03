@@ -16,22 +16,22 @@ class Test_GoogleplusAnalytics(unittest.TestCase):
         self.googleplusobj_GoogleplusAnalytics = GoogleplusAnalytics(self.googleplusData,
                                                                     self.date_Jan01, self.date_Aug05)
 
-    def test_getCountOfFavorites(self):
+    def test_getCountOfPlusones(self):
         self.assertEqual(1140, self.googleplusobj_GoogleplusAnalytics.getCountOfPlusones())
 
-    def test_getCountOfReplies(self):
+    def test_getCountOfComments(self):
         self.assertEqual(96, self.googleplusobj_GoogleplusAnalytics.getCountOfComments())
 
-    def test_getCountOfRetweets(self):
+    def test_getCountOfReshares(self):
         self.assertEqual(88, self.googleplusobj_GoogleplusAnalytics.getCountOfReshares())
 
-    def test_getCountOfTweets(self):
+    def test_getCountOfPostnotes(self):
          self.assertEqual(3, self.googleplusobj_GoogleplusAnalytics.getCountOfPostnotes())
 
     def test_getCountOfActions(self):
         self.assertEqual({'total_actions': 1324}, self.googleplusobj_GoogleplusAnalytics.getCountOfActions())
 
-    def test_getCountOfActionsPerTweet(self):
+    def test_getCountOfActionsPerPostnote(self):
         self.assertEqual({'total_actions_per_post_note': 441},
                          self.googleplusobj_GoogleplusAnalytics.getCountOfActionsPerPostnote())
 

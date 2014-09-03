@@ -30,9 +30,6 @@ class Test_UserCounts(unittest.TestCase):
                                                    'plusones_count', 'comments_count',
                                                    'reshares_count', 'updated')
 
-    # def test_misc(self):
-    #     self.assertEqual(True,False)
-
     def test_getAllData(self):
         gplusObj_allData = self.googleplusobj_UserCounts.getAllData
         twtObj_allData = self.twitterobj_UserCounts.getAllData

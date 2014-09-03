@@ -7,6 +7,8 @@ Shareablee - interview question: providing a module used to generate social medi
 
 Using: PyCharm 3.4.1 (Community Edition) / Python 2.6.7
 
+Note: the date ranges are using datetime.date
+-----
 
 
 --------
