@@ -1,3 +1,19 @@
+
+***
+Note:
+-----
+feedback: not scalable, first time tackling this type of problem
+
+
+Improvements:
+use pandas to handle the wrangling of mock user data
+shorten modulenames, methodnames (refactoring)
+
+
+Leaving here for future tackling and other users to dive into
+***
+
+
 shareablee_socialMediaMetrics
 =============================
 
